@@ -65,9 +65,26 @@ class ProblemSolutions {
 
     public int findKthLargest(int[] array, int k) {
 
-        // ADD YOUR CODE HERE
+        //create a min-heap
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
 
-        return 0;
+        //add the first k elements to the min-heap
+        for (int i = 0; i < k; i++) {
+            minHeap.add(array[i]);
+        }
+
+        //check to add them to the heap
+        for (int i = k; i < array.length; i++) {
+            //if the current element is larger than the smallest in the min-heap, remove the smallest element
+            if (array[i] > minHeap.peek()) {
+                minHeap.poll();
+                //add the current element
+                minHeap.add(array[i]);
+            }
+        }
+
+        //top of min-heap is largest k element
+        return minHeap.peek();
     }
 
 
@@ -85,10 +102,15 @@ class ProblemSolutions {
      */
 
     public int[] sort2Arrays(int[] array1, int[] array2) {
+        //create an array that can hold elements from both arrays
+        int combinedLength = array1.length + array2.length;
+        int[] combinedArray = new int[combinedLength];
+        //copy elements from array1 and array2 into combined array
+        System.arraycopy(array1, 0, combinedArray, 0, array1.length);
+        System.arraycopy(array2, 0, combinedArray, array1.length, array2.length);
+        //sort combined array
+        Arrays.sort(combinedArray);
 
-        // ADD YOU CODE HERE
-
-        return null;
+        return combinedArray;
     }
-
 }
