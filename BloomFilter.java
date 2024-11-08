@@ -14,7 +14,7 @@ import java.util.Set;
 import java.security.SecureRandom;
 import java.lang.Math;
 
-
+//Grant Smith Comp 272
 /**
  * Bloom Filters
  *
@@ -224,7 +224,19 @@ class BloomFilter {
         // this class on available methods. You can also see how method 'add'
         // in this class uses the object.
 
-        return false;
+        //checks if the string is in the set
+        for (int n=0; n < noHashes; n++){
+            //gets hash code for the string
+            long hc = hashCode(s, n);
+            //finds the index of the bit using hashcode
+            int bitNo = (int) (hc) & this.hashMask;
+            //if it's not in the set, no string in set
+            if (!data.get(bitNo)){
+                return false;
+            }
+        }
+        //if the bits are in the set, the string probably is too
+        return true;
     }
 
 
